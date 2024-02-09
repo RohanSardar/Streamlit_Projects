@@ -1,3 +1,3 @@
-# Streamlit_Projects
+# Chart Plotter
 
-*This is just a testing repo for my streamlit projects*
+*This is just a testing repo for my first streamlit project*
