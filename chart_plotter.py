@@ -16,11 +16,12 @@ y = col2.number_input('Upper range', value=None, placeholder='Type upper range..
 
 n = st.slider('Number of random variables', 0, 100)
 
-chart_data = pd.DataFrame(np.random.randint(int(x), int(y)+1, int(n)), columns=["a"])
+if x and y:
+    st.write('### Output')
 
-st.write('### Output')
-
-if ops == 'Line Chart':
-    st.line_chart(chart_data)
-elif ops == 'Scatter Chart':
-    st.scatter_chart(chart_data)
+    chart_data = pd.DataFrame(np.random.randint(int(x), int(y)+1, int(n)), columns=["a"])
+    
+    if ops == 'Line Chart':
+        st.line_chart(chart_data)
+    elif ops == 'Scatter Chart':
+        st.scatter_chart(chart_data)
