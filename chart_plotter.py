@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -23,9 +22,9 @@ def custom_plot(ops):
         if ' ' in n:
             n = np.array(n.split()).astype('int')
         else:
-            if len(n) > 0 and n[-1] == ',':
+            if n[-1] == ',':
                 n = n[:-1]
-                n = np.array(n.split(',')).astype('int')
+            n = np.array(n.split(',')).astype('int')
 
         st.write('### Output')
 
@@ -34,19 +33,21 @@ def custom_plot(ops):
         else:
             st.scatter_chart(n)
 
+if 'mode' not in st.session_state:
+    st.session_state['mode'] = False
+
 st.title("Chart Plotter")
 
 ops = st.selectbox(
     "Type of chart",
     ('Line Chart', 'Scatter Chart')
 )
+st.write('##### Currently in {} mode'.format(
+    'random' if st.session_state['mode'] == False else 'custom'))
 
-custom = st.toggle('Custom data mode')
+custom = st.toggle('Custom data mode', key='mode')
 
-if custom == True:
-    st.write('###### Currently in custom mode')
-    custom_plot(ops)
-
-else:
-    st.write('###### Currently in random mode')
+if st.session_state['mode'] == False:
     random_plot(ops)
+else:
+    custom_plot(ops)
